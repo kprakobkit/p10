@@ -20,6 +20,8 @@ require "sinatra/reloader" if development?
 
 require 'erb'
 
+require 'Yummly'
+
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
@@ -43,3 +45,10 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
+# Yummly configuration
+Yummly.configure do |config|
+  config.app_id = "189c8109"
+  config.app_key = "694f706cbf0942f32f6b2c95df22bdc5"
+  config.use_ssl = true # Default is false
+end
