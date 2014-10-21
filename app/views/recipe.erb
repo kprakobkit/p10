@@ -1,6 +1,6 @@
 <h2><%= @recipe.name %></h2>
 <ul>
-  <% @recipe.ingredients.each do |ingredient| %>
+  <% @recipe.ingredients.uniq.each do |ingredient| %>
     <li>
     <%= ingredient %>
     </li>
