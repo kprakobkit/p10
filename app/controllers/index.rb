@@ -1,11 +1,13 @@
 get '/' do
- redirect '/recipes' 
+  redirect '/recipes' 
 end
 
-post '/recipes' do
-  search_string = params[:search]
-  @result = Yummly.search(search_string, :maxResult => 20)
-  @result_total = @result.matches.size
+get '/recipes' do
+  if params[:search]
+    @result = Yummly.search(params[:search], :maxResult => 20)
+  else
+    @result = Yummly.search("Eggplant", :maxResult => 20)
+  end
 
   @saved_recipes = Recipe.all
   erb :index
