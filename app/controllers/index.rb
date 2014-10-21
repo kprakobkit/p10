@@ -6,7 +6,7 @@ get '/recipes' do
   if params[:search]
     @result = Yummly.search(params[:search], :maxResult => 20, :requirePictures => true)
   else
-    @result = Yummly.search("Eggplant", :maxResult => 20)
+    @result = Yummly.search("Eggplant", :maxResult => 20, :requirePictures => true)
   end
 
   @saved_recipes = Recipe.all
@@ -36,11 +36,7 @@ post '/recipes/:recipe_id/email' do
   email = params[:email]
   @ingredients = recipe.ingredients.uniq
   subject = "Recipe for: #{recipe.name}"
-
-  Pony.mail(:to => email,
-            :from => email,
-            :subject => subject,
-            :html_body => erb(:email, layout: false))
+  send_email(email, subject)
 
   redirect "recipes/#{recipe.id}"
 end

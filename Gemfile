@@ -17,8 +17,11 @@ gem 'shotgun'
 
 gem 'yummly'
 gem 'pony'
+gem 'rufus-scheduler'
 
 gem 'pry'
+
+gem 'rerun'
 
 group :test do
   gem 'shoulda-matchers'
