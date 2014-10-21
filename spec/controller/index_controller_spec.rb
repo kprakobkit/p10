@@ -1,20 +1,30 @@
 require_relative '../spec_helper'
 
 describe :Controller do
-  context "get /recipes" do
-    it "should display all saved recipes" do
-    end
-    it "should display search results from Yummly's API" do
-    end
-    it "should display all saved recipes" do
-    end
+  before (:all) do
+    Recipe.delete_all
   end
+  context "get /recipes" do
+    before (:each) do
+      recipe = Yummly.find('Grilled-marinated-eggplant-315336')
+      Recipe.create(name: recipe.name, yummly_id: recipe.id, ingredients: recipe.ingredients)
+    end
 
-  context "get/recipes/:id" do
-    it "should display the recipe with the specified id from Yummly's API" do
+    it "should display all saved recipes" do
+      get '/recipes'
+      saved_recipe_name = Recipe.all.map { |recipe| recipe.name }
+      saved_recipe_name.each do |recipe_name|
+        expect(last_response.body).to include(recipe_name)
+      end
     end
   end
 
   context "post 'recipes/recipe_id' " do
+
+    it "should save a recipe" do
+      recipe = Yummly.find('Grilled-marinated-eggplant-315336')
+
+      post '/recipes/:result_id'
+    end
   end
 end
