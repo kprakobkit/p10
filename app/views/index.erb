@@ -2,15 +2,14 @@
 
 <form action="/recipes" method="POST">
   <input type="text" name="search">
-  <input type="submit">
+  <input type="submit" value="Search">
 </form>
 
 <ul>
   <% if @result  %>
-    <h2><%= @result_total %></h2>
     <% @result.collect do |result| %>
       <li>
-      <%= result.name %>
+      <a href="/recipes/<%= result.id %>"><%= result.name %></a>
       </li>
     <% end %>
   <% end %>

@@ -9,3 +9,10 @@ post '/recipes' do
 
   erb :index
 end
+
+get '/recipes/:result_id' do
+  p params[:result_id] 
+  @recipe = Yummly.find(params[:result_id])
+
+  erb :recipe
+end
