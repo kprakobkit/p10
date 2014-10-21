@@ -34,11 +34,13 @@ end
 post '/recipes/:recipe_id/email' do
   recipe = Yummly.find(params[:recipe_id])
   email = params[:email]
-  ingredients = recipe.ingredients
+  @ingredients = recipe.ingredients.uniq
   subject = "Recipe for: #{recipe.name}"
 
   Pony.mail(:to => email,
             :from => email,
             :subject => subject,
-            :body => ingredients)
+            :html_body => erb(:email, layout: false))
+
+  redirect "recipes/#{recipe.id}"
 end
