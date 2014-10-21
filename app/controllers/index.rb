@@ -30,3 +30,15 @@ post '/recipes' do
     status 400
   end
 end
+
+post '/recipes/:recipe_id/email' do
+  recipe = Yummly.find(params[:recipe_id])
+  email = params[:email]
+  ingredients = recipe.ingredients
+  subject = "Recipe for: #{recipe.name}"
+
+  Pony.mail(:to => email,
+            :from => email,
+            :subject => subject,
+            :body => ingredients)
+end
