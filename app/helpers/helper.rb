@@ -1,8 +1,8 @@
 helpers do
-  def send_email(email, subject)
-    time = Time.now + 2
+  def send_email(email, subject, time)
+    time_to_send = Time.now + time 
     scheduler = Rufus::Scheduler.new
-    scheduler.in '2s' do
+    scheduler.in time_to_send do
       Pony.mail(:to => email,
                 :from => email,
                 :subject => subject,

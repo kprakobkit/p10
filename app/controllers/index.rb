@@ -36,7 +36,5 @@ post '/recipes/:recipe_id/email' do
   email = params[:email]
   @ingredients = recipe.ingredients.uniq
   subject = "Recipe for: #{recipe.name}"
-  send_email(email, subject)
-
-  redirect "recipes/#{recipe.id}"
+  send_email(email, subject, 10)
 end
