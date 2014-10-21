@@ -1,10 +1,10 @@
 get '/' do
-  redirect '/recipes' 
+  redirect '/recipes'
 end
 
 get '/recipes' do
   if params[:search]
-    @result = Yummly.search(params[:search], :maxResult => 20)
+    @result = Yummly.search(params[:search], :maxResult => 20, :requirePictures => true)
   else
     @result = Yummly.search("Eggplant", :maxResult => 20)
   end

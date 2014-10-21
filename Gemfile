@@ -18,6 +18,8 @@ gem 'shotgun'
 gem 'yummly'
 gem 'pony'
 
+gem 'pry'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'

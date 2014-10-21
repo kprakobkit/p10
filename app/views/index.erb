@@ -5,24 +5,30 @@
   <input type="submit" value="Search">
 </form>
 
-<ul>
-  <% if @result  %>
-    <% @result.each do |result| %>
-      <li>
-      <a href="/recipes/<%= result.id %>"><%= result.name %></a>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+<% if @result.matches.size != 0 %>
+  <div class="row">
+  <% @result.each do |result| %>
+    <div class="col-sm-6 col-md-4">
+    <img src="<%= result.images.first.small_url %>" class="img-responsive img-thumbnail" alt="...">
+    <div class="caption">
+      <p><a href="/recipes/<%= result.id %>"><%= result.name %></a></p>
+    </div>
+  </div>
+<% end %>
+</div>
+<% else %>
+  <h3>No matches found - Please try again</h3>
+<% end %>
+
 
 <h1>Saved Recipes</h1>
 
 <% if @saved_recipes %>
   <ul>
-    <% @saved_recipes.each do |recipe| %>
-      <li>
-        <%= recipe.name %>
-      </li>
-    <% end %>
-  </ul>
+  <% @saved_recipes.each do |recipe| %>
+    <li>
+  <%= recipe.name %>
+  </li>
+<% end %>
+</ul>
 <% end %>
