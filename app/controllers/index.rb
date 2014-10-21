@@ -19,7 +19,7 @@ get '/recipes/:recipe_id' do
   erb :recipe
 end
 
-post '/recipes/:result_id' do
+post '/recipes/:recipe_id' do
   recipe = Yummly.find(params[:recipe_id])
 
   saved_recipe = Recipe.new(name: recipe.name, yummly_id: recipe.id, ingredients: recipe.ingredients)
