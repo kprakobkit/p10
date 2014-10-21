@@ -6,3 +6,6 @@
     </li>
   <% end %>
 </ul>
+<form action="/recipes/<%= @recipe.id %>" method="POST">
+  <input type="submit" value="Save">
+</form>

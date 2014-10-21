@@ -7,7 +7,7 @@
 
 <ul>
   <% if @result  %>
-    <% @result.collect do |result| %>
+    <% @result.each do |result| %>
       <li>
       <a href="/recipes/<%= result.id %>"><%= result.name %></a>
       </li>
@@ -15,3 +15,15 @@
   <% end %>
 </ul>
 
+<h1>Saved Recipes</h1>
+
+<% if @saved_recipes %>
+  <ul>
+    <% @saved_recipes.each do |recipe| %>
+      <li>
+        <%= recipe.name %>
+      </li>
+
+    <% end %>
+  </ul>
+<% end %>
