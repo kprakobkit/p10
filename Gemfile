@@ -16,6 +16,7 @@ gem 'rake'
 gem 'shotgun'
 
 gem 'yummly'
+gem 'pony'
 
 group :test do
   gem 'shoulda-matchers'
