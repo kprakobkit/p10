@@ -1,4 +1,4 @@
-<h2><%= @recipe.name %></h2>
+<h2><%= @recipe.name %> <%= "| already Saved" if @from_db %> </h2>
 <ul>
   <% @recipe.ingredients.uniq.each do |ingredient| %>
     <li>
@@ -6,6 +6,7 @@
     </li>
   <% end %>
 </ul>
+
 <form action="/recipes" method="POST">
   <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
   <input type="submit" value="Save">

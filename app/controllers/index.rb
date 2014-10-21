@@ -14,12 +14,19 @@ get '/recipes' do
 end
 
 get '/recipes/:recipe_id' do
-  @recipe = Yummly.find(params[:recipe_id])
+  if Recipe.find_by(yummly_id: params[:recipe_id])
+    p @recipe = Recipe.find_by(yummly_id: params[:recipe_id])
+    @from_db = true
+  else
+    p @recipe = Yummly.find(params[:recipe_id])
+    @from_db = false
+  end
 
   erb :recipe
 end
 
 post '/recipes' do
+  
   recipe = Yummly.find(params[:recipe_id])
 
   saved_recipe = Recipe.new(name: recipe.name, yummly_id: recipe.id, ingredients: recipe.ingredients)

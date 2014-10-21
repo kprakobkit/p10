@@ -11,7 +11,6 @@ helpers do
   end
 end
 
-
 module MyScheduler
   def self.scheduler
     @scheduler ||= Rufus::Scheduler.new
