@@ -5,11 +5,12 @@ end
 get '/recipes' do
   if params[:search]
     @result = Yummly.search(params[:search], :maxResult => 20, :requirePictures => true)
+    @search_term = params[:search]
+    @page_number = 0
   else
     @result = nil
   end
 
-  @scheduled_recipes = Recipe.all.order(:scheduled_at)
   erb :index
 end
 
@@ -22,6 +23,18 @@ get '/recipes/:recipe_id' do
     @from_db = false
   end
   erb :recipe
+end
+
+get '/recipes/:search_query/:page_number' do
+  if params[:search_query]
+    @page_number = params[:page_number].to_i + 1
+    @result = Yummly.search(params[:search_query], :maxResult => 20, :start => @page_number *  20, :requirePictures => true)
+    @search_term = params[:search_query]
+  else
+    @result = nil
+  end
+  
+  erb :index
 end
 
 post '/recipes/schedule' do
@@ -57,5 +70,5 @@ get '/scheduled_meals' do
     end
   end
 
-   erb :scheduled_meals
+  erb :scheduled_meals
 end
