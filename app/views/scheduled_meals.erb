@@ -1,0 +1,12 @@
+<h1>Scheduled Meals for this Week</h1>
+<% @grouped_scheduled_meals.each do |day, meals| %>
+  <h2><%= day.strftime("%A") %></h2>
+  <ul class="scheduled_recipes">
+    <% meals.each do |meal| %>
+      <li id="<%= meal.yummly_id %>">
+    <p><a href="/recipes/<%= meal.yummly_id %>"><%= meal.name %></a></p>
+    <button class="delete">delete</button>
+    </li>
+  <% end %>
+  </ul>
+<% end %>

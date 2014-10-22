@@ -8,10 +8,11 @@ helpers do
                 :html_body => erb(:email, layout: false))
     end
   end
-end
 
-module MyScheduler
-  def self.scheduler
-    @scheduler ||= Rufus::Scheduler.new
+  def days_in_week
+    days_in_week = (0..6).map do
+      |n| Date.today.beginning_of_week + n
+    end
+    days_in_week
   end
 end

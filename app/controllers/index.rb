@@ -9,7 +9,7 @@ get '/recipes' do
     @result = nil
   end
 
-  @scheduled_recipes = Recipe.all
+  @scheduled_recipes = Recipe.all.order(:scheduled_at)
   erb :index
 end
 
@@ -40,11 +40,21 @@ post '/recipes/schedule' do
     status 400
   end
 end
- 
+
 post '/recipes/delete/:yummly_id' do
   content_type :json
   recipe = Recipe.find_by(yummly_id: params[:yummly_id])
   recipe.destroy
-  
+
   {yummly_id: recipe.yummly_id}.to_json
+end
+
+get '/scheduled_meals' do
+  scheduled_meals = Recipe.all.select do |recipe|
+    days_in_week.include?(recipe.scheduled_date)
+  end
+
+  p @grouped_scheduled_meals = Hash[scheduled_meals.group_by { |meal| meal.scheduled_date }.sort]
+
+   erb :scheduled_meals
 end

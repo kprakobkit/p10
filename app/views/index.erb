@@ -24,17 +24,3 @@
 <% end %>
 
 
-<h1>Scheduled Recipes</h1>
-
-<% if @scheduled_recipes %>
-  <ul class="scheduled_recipes">
-    <% @scheduled_recipes.each do |recipe| %>
-      <li id="<%= recipe.yummly_id %>">
-      <a href="/recipes/<%= recipe.yummly_id %>"><%= recipe.name %></a> - 
-      <%= recipe.scheduled_at.strftime("%A %B %d") %>
-      <br>
-      <button class="delete">delete</button>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
