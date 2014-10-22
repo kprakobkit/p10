@@ -1,6 +1,6 @@
-<h1>Scheduled Meals for this Week</h1>
-<% @grouped_scheduled_meals.each do |day, meals| %>
-  <h2><%= day.strftime("%A") %></h2>
+<h1>Meals for this Week</h1>
+<% @scheduled_meals.each do |day, meals| %>
+  <h3><%= day.strftime("%A") %></h3>
   <ul class="scheduled_recipes">
     <% meals.each do |meal| %>
       <li id="<%= meal.yummly_id %>">

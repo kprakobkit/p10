@@ -50,11 +50,13 @@ post '/recipes/delete/:yummly_id' do
 end
 
 get '/scheduled_meals' do
-  scheduled_meals = Recipe.all.select do |recipe|
-    days_in_week.include?(recipe.scheduled_date)
-  end
+  @scheduled_meals = {}
 
-  p @grouped_scheduled_meals = Hash[scheduled_meals.group_by { |meal| meal.scheduled_date }.sort]
+  days_in_week.each do |day|
+    @scheduled_meals[day] = Recipe.all.select do |recipe|
+      recipe.scheduled_date == day
+    end
+  end
 
    erb :scheduled_meals
 end
