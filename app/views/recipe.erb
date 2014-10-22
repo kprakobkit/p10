@@ -1,4 +1,5 @@
-<h2><%= @recipe.name %> <%= "| already Saved" if @from_db %> </h2>
+<h2><%= @recipe.name %> <%= "| already Saved" if @from_db %></h2>
+
 <ul>
   <% @recipe.ingredients.uniq.each do |ingredient| %>
     <li>
@@ -7,12 +8,16 @@
   <% end %>
 </ul>
 
-<form action="/recipes" method="POST">
-  <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
-  <input type="submit" value="Save">
-</form>
+<% if @from_db %>
+  <%= "already scheduled at #{@recipe.scheduled_at}" %> 
+<% else %>
+  <form action="/recipes/schedule" method="POST">
+    <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
+    Email
+    <input type="text" name="email">
+    When would you like to make this?
+    <input type="date" name="date">
+    <p><input type="submit" value="Send"></p>
+  </form>
+<% end %>
 
-<form action="/recipes/<%= @recipe.id %>/email" method="POST">
-  <input type="text" name="email">
-  <input type="submit" value="Send">
-</form>

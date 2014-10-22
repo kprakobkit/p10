@@ -19,13 +19,13 @@ describe :Controller do
     end
   end
 
-  context "post 'recipes/:recipe_id' " do
+  context "post 'recipes/schedule' " do
 
     it "should save a recipe" do
       recipe = Yummly.find('Grilled-marinated-eggplant-315336')
 
       expect {
-        post '/recipes', {recipe_id: recipe.id}
+        post '/recipes/schedule', {recipe_id: recipe.id, date: "2014-10-22"}
       }.to change{ Recipe.count }.by(1)
     end
   end
