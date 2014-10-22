@@ -6,7 +6,7 @@ get '/recipes' do
   if params[:search]
     @result = Yummly.search(params[:search], :maxResult => 20, :requirePictures => true)
   else
-    @result = Yummly.search("Eggplant", :maxResult => 20, :requirePictures => true)
+    @result = nil
   end
 
   @scheduled_recipes = Recipe.all
@@ -28,7 +28,7 @@ end
 post '/recipes/schedule' do
   recipe = Yummly.find(params[:recipe_id])
 
-  scheduled_at = (Time.parse params[:date]) + (60 * 60 * 2)
+  scheduled_at = (Time.parse params[:date]) + (60 * 60 * 19)
   saved_recipe = Recipe.new(name: recipe.name, yummly_id: recipe.id, ingredients: recipe.ingredients, scheduled_at: scheduled_at)
 
   if saved_recipe.save
