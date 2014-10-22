@@ -1,7 +1,8 @@
 helpers do
-  def send_email(email, subject, time)
+  def send_email(email, subject, scheduled_at)
     scheduler = Rufus::Scheduler.new
-    scheduler.at time do
+    email_time = scheduled_at + (60 * 60 * 2)
+    scheduler.at email_time do
       Pony.mail(:to => email,
                 :from => email,
                 :subject => subject,

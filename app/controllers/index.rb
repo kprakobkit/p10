@@ -21,14 +21,13 @@ get '/recipes/:recipe_id' do
     @recipe = Yummly.find(params[:recipe_id])
     @from_db = false
   end
-
   erb :recipe
 end
 
 post '/recipes/schedule' do
   recipe = Yummly.find(params[:recipe_id])
 
-  scheduled_at = (Time.parse params[:date]) + (60 * 60 * 19)
+  scheduled_at = (Time.parse params[:date])
   saved_recipe = Recipe.new(name: recipe.name, yummly_id: recipe.id, ingredients: recipe.ingredients, scheduled_at: scheduled_at)
 
   if saved_recipe.save
