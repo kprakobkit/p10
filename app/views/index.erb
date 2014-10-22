@@ -7,28 +7,30 @@
 
 <% if @result.matches.size != 0 %>
   <div class="row">
-  <% @result.each do |result| %>
-    <div class="col-sm-6 col-md-4">
-    <img src="<%= result.images.first.small_url %>" class="img-responsive img-thumbnail" alt="...">
-    <div class="caption">
-      <p><a href="/recipes/<%= result.id %>"><%= result.name %></a></p>
-    </div>
+    <% @result.each do |result| %>
+      <div class="col-sm-6 col-md-4">
+        <img src="<%= result.images.first.small_url %>" class="img-responsive img-thumbnail" alt="...">
+        <div class="caption">
+          <p><a href="/recipes/<%= result.id %>"><%= result.name %></a></p>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
-</div>
 <% else %>
   <h3>No matches found - Please try again</h3>
 <% end %>
 
 
-<h1>Saved Recipes</h1>
+<h1>Scheduled Recipes</h1>
 
-<% if @saved_recipes %>
-  <ul>
-  <% @saved_recipes.each do |recipe| %>
-    <li>
-  <%= recipe.name %>
-  </li>
-<% end %>
-</ul>
+<% if @scheduled_recipes %>
+  <ul class="scheduled_recipes">
+    <% @scheduled_recipes.each do |recipe| %>
+      <li id="<%= recipe.yummly_id %>">
+      <a href="/recipes/<%= recipe.yummly_id %>"><%= recipe.name %></a> - 
+      <%= recipe.scheduled_at.strftime("%A %B %d") %>
+      <button class="delete">delete</button>
+      </li>
+    <% end %>
+  </ul>
 <% end %>

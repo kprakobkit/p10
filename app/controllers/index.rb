@@ -9,7 +9,7 @@ get '/recipes' do
     @result = Yummly.search("Eggplant", :maxResult => 20, :requirePictures => true)
   end
 
-  @saved_recipes = Recipe.all
+  @scheduled_recipes = Recipe.all
   erb :index
 end
 
@@ -40,4 +40,11 @@ post '/recipes/schedule' do
     status 400
   end
 end
-
+ 
+post '/recipes/delete/:yummly_id' do
+  content_type :json
+  recipe = Recipe.find_by(yummly_id: params[:yummly_id])
+  recipe.destroy
+  
+  {yummly_id: recipe.yummly_id}.to_json
+end

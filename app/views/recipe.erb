@@ -1,4 +1,4 @@
-<h2><%= @recipe.name %> <%= "| already Saved" if @from_db %></h2>
+<h2><%= @recipe.name %><%= " - Scheduled at #{@recipe.scheduled_at.strftime("%A %B %d")}" if @from_db %></h2>
 
 <ul>
   <% @recipe.ingredients.uniq.each do |ingredient| %>
@@ -8,9 +8,7 @@
   <% end %>
 </ul>
 
-<% if @from_db %>
-  <%= "already scheduled at #{@recipe.scheduled_at}" %> 
-<% else %>
+<% if !@from_db %>
   <form action="/recipes/schedule" method="POST">
     <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
     Email
