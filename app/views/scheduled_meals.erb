@@ -1,6 +1,6 @@
 <h1>Meals for this Week</h1>
 <% @scheduled_meals.each do |day, meals| %>
-  <h3><%= day.strftime("%A") %></h3>
+  <h3><%= day.strftime("%A - %b %d") %></h3>
   <ul class="scheduled_recipes">
     <% meals.each do |meal| %>
       <li id="<%= meal.yummly_id %>">
