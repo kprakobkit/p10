@@ -7,7 +7,7 @@ describe :Controller do
   context "get /recipes" do
     before (:each) do
       recipe = Yummly.find('Grilled-marinated-eggplant-315336')
-      Recipe.create(name: recipe.name, yummly_id: recipe.id, ingredients: recipe.ingredients)
+      Recipe.create(name: recipe.name, yummly_id: recipe.id, ingredients: recipe.ingredients, scheduled_at: Time.now)
     end
 
     it "should display all saved recipes" do
