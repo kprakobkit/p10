@@ -26,6 +26,9 @@ require 'pony'
 
 require 'rufus-scheduler'
 
+require 'dotenv'
+Dotenv.load
+
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
@@ -52,7 +55,7 @@ require APP_ROOT.join('config', 'database')
 
 # Yummly configuration
 Yummly.configure do |config|
-  config.app_id = "189c8109"
-  config.app_key = "694f706cbf0942f32f6b2c95df22bdc5"
+  config.app_id = ENV['APP_ID']
+  config.app_key = ENV['APP_KEY']
   config.use_ssl = true # Default is false
 end
