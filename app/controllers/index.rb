@@ -1,5 +1,6 @@
 get '/' do
-  redirect '/recipes'
+ # erb :main, :layout => false
+ redirect '/recipes'
 end
 
 get '/recipes' do
@@ -48,7 +49,7 @@ post '/recipes/schedule' do
     @ingredients = recipe.ingredients.uniq
     subject = "Recipe for: #{recipe.name}"
     send_email(params[:email], subject, scheduled_at)
-    redirect '/'
+    redirect '/recipes'
   else
     status 400
   end
@@ -62,10 +63,11 @@ post '/recipes/delete/:yummly_id' do
   {yummly_id: recipe.yummly_id}.to_json
 end
 
-get '/scheduled_meals' do
+get '/scheduled_meals/:start_date' do
+  @start_date = (Date.parse params[:start_date]).beginning_of_week
   @scheduled_meals = {}
 
-  days_in_week.each do |day|
+  days_in_week(@start_date).each do |day|
     @scheduled_meals[day] = Recipe.all.select do |recipe|
       recipe.scheduled_date == day
     end

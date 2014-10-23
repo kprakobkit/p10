@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+    normalize.css removes cross-browser differences in defaults, e.g.,
+    differences in how form elements appear between Firefox and IE
+    See: http://necolas.github.com/normalize.css/
+    -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <!-- Boostrap-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/application.css">
+    <title></title>
+  </head>
+  <body>
+    <div class="full-page-background">
+      <img src="http://www.lifeofpix.com/wp-content/uploads/2014/08/life-of-pix-free-stock-photos-food-sandwich-Vegetables-kitchen-1440x986.jpg" alt="">
+    </div>
+    <div class="container">
+      <div class="dead-center">
+        <div class="row">
+          <form class="form-horizontal" action="/recipes" method="GET">
+            <div class="form-group form-group-lg">
+              <input type="text" class="form-control" name="search" value="<%= @search_term %>" placeholder="Search recipes...">
+            </div>
+            <p class="text-center"><button type="submit" value="Search" class="btn btn-primary btn-lg">Search</button></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script src="/js/application.js"></script>
+  </body>
+</html>

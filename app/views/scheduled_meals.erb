@@ -1,12 +1,20 @@
-<h1>Meals for this Week</h1>
-<% @scheduled_meals.each do |day, meals| %>
-  <h3><%= day.strftime("%A - %b %d") %></h3>
-  <ul class="scheduled_recipes">
-    <% meals.each do |meal| %>
-      <li id="<%= meal.yummly_id %>">
-    <p><a href="/recipes/<%= meal.yummly_id %>"><%= meal.name %></a></p>
-    <button class="delete">delete</button>
-    </li>
-  <% end %>
-  </ul>
-<% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1 class="text-center ">Meals for this Week</h1>
+    <hr>
+    <ul class="pager">
+      <li class="previous"><a href="/scheduled_meals/<%= @start_date - 7 %>">&larr; Last Week</a></li>
+      <li class="next"><a href="/scheduled_meals/<%= @start_date + 7 %>">Next Week &rarr;</a></li>
+    </ul>
+    <% @scheduled_meals.each do |day, meals| %>
+      <h3 class="text-center"><%= day.strftime("%A - %b %d") %></h3>
+      <div class="scheduled_recipes list-group">
+        <% meals.each do |meal| %>
+          <div id="<%= meal.yummly_id %>">
+            <a class="list-group-item"  href="/recipes/<%= meal.yummly_id %>"><%= meal.name %> <button class="delete btn btn-danger btn-xs" id="<%= meal.yummly_id %>" style="display: inline-block; float: right;">remove</button></a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

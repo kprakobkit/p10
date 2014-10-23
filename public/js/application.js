@@ -6,7 +6,7 @@ var Controller = (function(){
   function bindDeleteButton(){ 
     $('.scheduled_recipes').on('click', '.delete', function(event) {
       event.preventDefault();
-      deleteUrl = "/recipes/delete/" + $(this).parent().attr('id');
+      deleteUrl = "/recipes/delete/" + $(this).attr('id');
       Server.deleteRequest(deleteUrl);
     });
   };
@@ -36,7 +36,7 @@ var Server = (function(){
 
 var View = (function(){
   function removeListElement(response_data) {
-    $list = 'li#' + response_data.yummly_id;
+    $list = 'div#' + response_data.yummly_id;
     $($list).remove()
   };
 

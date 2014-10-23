@@ -10,11 +10,8 @@ helpers do
     end
   end
 
-  def days_in_week
-    days_in_week = (0..6).map do
-      |n| Date.today.beginning_of_week + n
-    end
-    days_in_week
+  def days_in_week(start_date)
+    (start_date.beginning_of_week..start_date.end_of_week).to_a
   end
 
   def all_yummly_ids
