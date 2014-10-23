@@ -3,10 +3,10 @@
     <h1 class="text-center ">Meals for this Week</h1>
     <hr>
     <ul class="pager">
-      <li class="previous"><a href="/scheduled_meals/<%= @start_date - 7 %>">&larr; Last Week</a></li>
-      <li class="next"><a href="/scheduled_meals/<%= @start_date + 7 %>">Next Week &rarr;</a></li>
+      <li class="previous"><a href="/scheduled_meals/<%= @week_start_date - 7 %>">&larr; Last Week</a></li>
+      <li class="next"><a href="/scheduled_meals/<%= @week_start_date + 7 %>">Next Week &rarr;</a></li>
     </ul>
-    <% @scheduled_meals.each do |day, meals| %>
+    <% @meals_for_the_week.each do |day, meals| %>
       <h3 class="text-center"><%= day.strftime("%A - %b %d") %></h3>
       <div class="scheduled_recipes list-group">
         <% meals.each do |meal| %>

@@ -1,6 +1,6 @@
 get '/' do
-  erb :main, :layout => false
-  # redirect '/recipes'
+  # erb :main, :layout => false
+  redirect '/recipes'
 end
 
 get '/recipes' do
@@ -15,19 +15,6 @@ get '/recipes' do
   erb :index
 end
 
-get '/recipes/:recipe_id' do
-  @image_url = Yummly.find(params[:recipe_id]).images.first.large_url
-  @source_url = Yummly.find(params[:recipe_id]).attribution.url
-  if Recipe.find_by(yummly_id: params[:recipe_id])
-    @recipe = Recipe.find_by(yummly_id: params[:recipe_id])
-    @from_db = true
-  else
-    @recipe = Yummly.find(params[:recipe_id])
-    @from_db = false
-  end
-  erb :recipe
-end
-
 get '/recipes/:search_query/:page_number' do
   if params[:search_query]
     @page_number = params[:page_number].to_i + 1
@@ -38,6 +25,20 @@ get '/recipes/:search_query/:page_number' do
   end
 
   erb :index
+end
+
+get '/recipes/:recipe_id' do
+  recipe = Yummly.find(params[:recipe_id])
+  @image_url = recipe.images.first.large_url
+  @source_url = recipe.attribution.url
+  if Recipe.find_by(yummly_id: params[:recipe_id])
+    @recipe = Recipe.find_by(yummly_id: params[:recipe_id])
+    @from_db = true
+  else
+    @recipe = recipe
+    @from_db = false
+  end
+  erb :recipe
 end
 
 post '/recipes/schedule' do
@@ -64,15 +65,9 @@ post '/recipes/delete/:yummly_id' do
   {yummly_id: recipe.yummly_id}.to_json
 end
 
-get '/scheduled_meals/:start_date' do
-  @start_date = (Date.parse params[:start_date]).beginning_of_week
-  @scheduled_meals = {}
-
-  days_in_week(@start_date).each do |day|
-    @scheduled_meals[day] = Recipe.all.select do |recipe|
-      recipe.scheduled_date == day
-    end
-  end
+get '/scheduled_meals/:week_start_date' do
+  @week_start_date = (Date.parse params[:week_start_date]).beginning_of_week
+  @meals_for_the_week = get_meals_per_week(@week_start_date)
 
   erb :scheduled_meals
 end

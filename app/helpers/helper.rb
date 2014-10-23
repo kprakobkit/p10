@@ -10,11 +10,18 @@ helpers do
     end
   end
 
-  def days_in_week(start_date)
-    (start_date.beginning_of_week..start_date.end_of_week).to_a
+  def get_meals_per_week(week_start_date)
+    days_in_week = (week_start_date.beginning_of_week..week_start_date.end_of_week).to_a
+    meals_for_the_week = {}
+    days_in_week.each do |day|
+      meals_for_the_week[day] = Recipe.all.select do |recipe|
+        recipe.scheduled_date == day
+      end
+    end
+    meals_for_the_week
   end
 
   def all_yummly_ids
-    @yummly_ids = Recipe.get_yummly_ids
+    yummly_ids = Recipe.get_yummly_ids
   end
 end
