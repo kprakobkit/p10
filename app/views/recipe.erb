@@ -4,6 +4,7 @@
   <div class="alert alert-success" role"alert"><span class="glyphicon glyphicon-calendar"></span> Scheduled for <%= @recipe.scheduled_at.strftime("%A %B %d")%></div>
 <% end %>
 
+<h2>Ingredients</h2>
 <ul class="list-group">
   <% @recipe.ingredients.uniq.each do |ingredient| %>
     <li class="list-group-item">
