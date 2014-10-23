@@ -9,21 +9,26 @@
   </div>
 </div>
 <br>
+
 <% if @result %>
     <% @result.each do |result| %>
       <div class="col-5 col-sm-5 col-lg-3" style="height: 200px; text-align: center">
         <div style="width: 180px; height: 120px; margin: 0 auto;">
-          <img src="<%= result.images.first.small_url %>" class="img-responsive img-thumbnail" alt="..." style="width: 100%;height:auto">
-        </div>
-        <br>
-        <a href="/recipes/<%= result.id %>"><%= result.name %></a>
+        <img src="<%= result.images.first.small_url %>" class="img-responsive img-thumbnail" alt="..." style="width: 100%;height:auto">
       </div>
-    <% end %>
-  </div>
-  <ul class="pager">
-    <li class="<%= "disabled" if @page_number == 0 %>"><a href="/recipes/<%= @search_term %>/<%= @page_number-2 %>" >Previous</a></li>
-    <li><a href="/recipes/<%= @search_term %>/<%= @page_number %>">Next</a></li>
-  </ul>
+      <br>
+      <a href="/recipes/<%= result.id %>"><%= result.name %></a>
+      <%  if all_yummly_ids.include?(result.id) %>
+        <br>
+        <span class="label label-success">already scheduled</span> 
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<ul class="pager">
+  <li class="<%= "disabled" if @page_number == 0 %>"><a href="/recipes/<%= @search_term %>/<%= @page_number-2 %>" >Previous</a></li>
+  <li><a href="/recipes/<%= @search_term %>/<%= @page_number %>">Next</a></li>
+</ul>
 <% end %>
 
 

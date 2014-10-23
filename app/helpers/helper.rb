@@ -16,4 +16,8 @@ helpers do
     end
     days_in_week
   end
+
+  def all_yummly_ids
+    @yummly_ids = Recipe.get_yummly_ids
+  end
 end
