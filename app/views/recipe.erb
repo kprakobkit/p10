@@ -1,11 +1,12 @@
 <h2><%= @recipe.name %></h2>
+<p class="text-center"><img src="<%= @image_url %>" alt="picture"></p>
 <% if @from_db %>
-  <div class="alert alert-success" role"alert">Scheduled for <%= @recipe.scheduled_at.strftime("%A %B %d")%></div>
+  <div class="alert alert-success" role"alert"><span class="glyphicon glyphicon-calendar"></span> Scheduled for <%= @recipe.scheduled_at.strftime("%A %B %d")%></div>
 <% end %>
 
-<ul>
+<ul class="list-group">
   <% @recipe.ingredients.uniq.each do |ingredient| %>
-    <li>
+    <li class="list-group-item">
     <%= ingredient %>
     </li>
   <% end %>

@@ -15,6 +15,7 @@ get '/recipes' do
 end
 
 get '/recipes/:recipe_id' do
+  @image_url = Yummly.find(params[:recipe_id]).images.first.large_url
   if Recipe.find_by(yummly_id: params[:recipe_id])
     @recipe = Recipe.find_by(yummly_id: params[:recipe_id])
     @from_db = true
@@ -33,7 +34,7 @@ get '/recipes/:search_query/:page_number' do
   else
     @result = nil
   end
-  
+
   erb :index
 end
 
