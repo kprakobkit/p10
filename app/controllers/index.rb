@@ -1,6 +1,5 @@
 get '/' do
-  erb :main, :layout => false
-  # redirect '/recipes'
+  redirect '/recipes'
 end
 
 get '/recipes' do
