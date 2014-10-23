@@ -1,4 +1,4 @@
-<h2><%= @recipe.name %></h2>
+<h2 class="text-center"><%= @recipe.name %></h2>
 <p class="text-center"><img src="<%= @image_url %>" alt="picture"></p>
 <% if @from_db %>
   <div class="alert alert-success" role"alert"><span class="glyphicon glyphicon-calendar"></span> Scheduled for <%= @recipe.scheduled_at.strftime("%A %B %d")%></div>
@@ -10,6 +10,9 @@
     <%= ingredient %>
     </li>
   <% end %>
+  <li class="list-group-item">
+  <a href="<%= @source_url %>" target="_blank">For directions, click here...</a>
+  </li>
 </ul>
 
 <% if !@from_db %>
