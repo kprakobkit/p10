@@ -1,4 +1,7 @@
-<h2><%= @recipe.name %><%= " - Scheduled at #{@recipe.scheduled_at.strftime("%A %B %d")}" if @from_db %></h2>
+<h2><%= @recipe.name %></h2>
+<% if @from_db %>
+  <div class="alert alert-success" role"alert">Scheduled for <%= @recipe.scheduled_at.strftime("%A %B %d")%></div>
+<% end %>
 
 <ul>
   <% @recipe.ingredients.uniq.each do |ingredient| %>
