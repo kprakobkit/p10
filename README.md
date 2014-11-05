@@ -1,6 +1,8 @@
-P10 - Peter Prakobkit
+Plan your meals
 
-To do:
-- style first search page;
-- refactor;
-- deploy;
+This is my portfolio challenge for week two of Dev Bootcamp.
+
+- Sinatra app
+- Some JS frontend
+- Consumes Yummly API
+- Rufus scheduler to send scheduled emails with Pony
